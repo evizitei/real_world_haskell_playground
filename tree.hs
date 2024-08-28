@@ -22,3 +22,8 @@ myDrop n xs = if n <= 0 || null xs
 tidyDrop n xs | n <= 0 = xs
 tidyDrop _ [] = []
 tidyDrop n (_:xs) = tidyDrop (n - 1) xs
+
+myLength :: [a] -> Int
+myLength xs | null xs = 0
+myLength [] = 0
+myLength (_:xs) = 1 + myLength xs
