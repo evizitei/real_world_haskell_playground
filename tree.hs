@@ -1,3 +1,5 @@
+import Data.List (sortBy)
+
 data Tree a = Node a (Tree a) (Tree a)
             | Empty
             deriving (Show)
@@ -44,3 +46,11 @@ myReverse [] = []
 myReverse (x:xs) = myReverse xs ++ [x]
 
 isPalindrome xs = xs == myReverse xs
+
+sortByLength ls = sortBy compareLength ls
+    where compareLength xs ys = compare (myLength xs) (myLength ys)
+
+intersperse :: a -> [[a]] -> [a]
+intersperse _ [] = []
+intersperse _ [xs] = xs
+intersperse sep (x:xs) = x ++ [sep] ++ intersperse sep xs
