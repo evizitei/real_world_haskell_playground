@@ -34,3 +34,13 @@ mySum [] = 0
 mySum (x:xs) = x + mySum xs
 
 meanOfList xs = mySum xs / fromIntegral (myLength xs)
+
+palindrome xs | null xs = xs
+palindrome [] = []
+palindrome (x:xs) = x : palindrome xs ++ [x]
+
+myReverse xs | null xs = []
+myReverse [] = []
+myReverse (x:xs) = myReverse xs ++ [x]
+
+isPalindrome xs = xs == myReverse xs
