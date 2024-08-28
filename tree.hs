@@ -27,3 +27,10 @@ myLength :: [a] -> Int
 myLength xs | null xs = 0
 myLength [] = 0
 myLength (_:xs) = 1 + myLength xs
+
+mySum :: Num a => [a] -> a
+mySum xs | null xs = 0
+mySum [] = 0
+mySum (x:xs) = x + mySum xs
+
+meanOfList xs = mySum xs / fromIntegral (myLength xs)
