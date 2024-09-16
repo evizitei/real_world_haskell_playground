@@ -1,3 +1,4 @@
+splitLines :: String -> [String]
 splitLines [] = []
 splitLines cs =
   let (pre, suf) = break isLineTerminator cs
@@ -8,3 +9,6 @@ splitLines cs =
         _ -> []
   where
     isLineTerminator c = c == '\r' || c == '\n'
+
+fixLines :: String -> String
+fixLines input = unlines (splitLines input)
