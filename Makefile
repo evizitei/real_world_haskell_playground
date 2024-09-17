@@ -9,4 +9,5 @@ compile_json:
 	ghc -outputdir ./build \
 	--make json/Jason.hs \
 	--make json/PutJSON.hs \
+	--make json/Prettify.hs \
 	--make json/Main.hs -o ./bin/json
