@@ -1,4 +1,4 @@
-module PutJSON (renderJVal) where
+module PutJSON (renderJVal, putJVal) where
 
 import Data.List (intercalate)
 import Jason

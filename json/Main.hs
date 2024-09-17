@@ -1,6 +1,7 @@
 module Main (main) where
 
 import Jason
+import PutJSON (putJVal)
 
 main :: IO ()
-main = print (getString (JObject [("foo", JNumber 1), ("bar", JBool False)]))
+main = putJVal (JObject [("foo", JNumber 1), ("bar", JBool False), ("baz", JString "asdf")])
