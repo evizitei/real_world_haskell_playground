@@ -1,8 +1,12 @@
 module Main (main) where
 
 import Jason
-import PutJSON (putJVal)
-import Prettify 
+import Prettify (compact, pretty) 
+import PrettyJSON (renderJValue)
+
+renderJObj = compact . renderJValue
+prettyJobj = (pretty 120) . renderJValue
 
 main :: IO ()
-main = putJVal (JObject [("foo", JNumber 1), ("bar", JBool False), ("baz", JString "asdf")])
+main = let jdoc = JObject [("foo", JNumber 1), ("bar", JBool False), ("baz", JString "asdf")]
+  in putStrLn ((renderJObj jdoc) ++ "\n\n" ++ (prettyJobj jdoc ))

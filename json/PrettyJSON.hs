@@ -22,14 +22,6 @@ renderJValue (JObject obj) = series '{' '}' field obj
 string :: String -> Doc
 string = enclose '"' '"' . hcat . map oneChar
 
-text :: String -> Doc
-text str = undefined
-
-double :: Double -> Doc
-double num = undefined
-
-char :: Char -> Doc
-char c = undefined
 
 enclose :: Char -> Char -> Doc -> Doc
 enclose left right x = char left <-> x <-> char right
