@@ -10,4 +10,5 @@ compile_json:
 	--make json/Jason.hs \
 	--make json/PutJSON.hs \
 	--make json/Prettify.hs \
+	--make json/PrettyJSON.hs \
 	--make json/Main.hs -o ./bin/json
