@@ -1,5 +1,5 @@
 module Prettify (
-    Doc, (<->), punctuate, compact, pretty,
+    Doc, (<->), punctuate, compact, pretty, fill,
     hcat, fsep, text, double, char
     ) where
 
@@ -7,6 +7,7 @@ import Jason
 import Numeric (showHex)
 import Data.Bits (shiftR, (.&.))
 import Data.Char (ord)
+import Language.Haskell.TH (newtypeD_doc)
 
 data Doc = Empty
          | Char Char
@@ -98,5 +99,18 @@ w `fits` _ | w < 0 = False
 w `fits` "" = True
 w `fits` ('\n':_) = True
 w `fits` (c:cs) = (w-1) `fits` cs
-       
 
+fill :: Int -> Doc -> Doc
+fill width doc = processNode 0 [doc]
+    where processNode col [] = Empty
+          processNode col (d:ds) = 
+            case d of
+                Empty -> Empty <-> processNode col ds
+                Char c -> Char c <-> processNode (col + 1) ds
+                Text s -> Text s <-> processNode (col + length s) ds
+                Line -> fillLine col width <-> processNode 0 ds
+                a `Concat` b -> processNode col (a:b:ds)
+                a `Union` b -> processNode col (b:ds)
+          fillLine currentLength targetWidth | currentLength >= targetWidth = Line
+                                             | otherwise = Text (replicate (targetWidth - currentLength) ' ') <-> Line
+       
