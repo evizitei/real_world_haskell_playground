@@ -113,4 +113,24 @@ fill width doc = processNode 0 [doc]
                 a `Union` b -> processNode col (b:ds)
           fillLine currentLength targetWidth | currentLength >= targetWidth = Line
                                              | otherwise = Text (replicate (targetWidth - currentLength) ' ') <-> Line
-       
+
+nest :: Int -> Doc -> Doc
+nest indentAmount doc = processNode 0 0 [doc]
+  where processNode _ _ [] = Empty
+        processNode col indentLevel (d:ds) =
+          case d of
+            Empty -> Empty <-> processNode col indentLevel ds
+            Char c -> Char c <-> processNode (col + 1) (checkIndentLevel indentLevel c) ds
+            Text s -> Text s <-> processNode (col + length s) indentLevel ds
+            Line -> Line <-> Text (indentString indentAmount indentLevel) <-> processNode (indentAmount * indentLevel) indentLevel ds
+            a `Concat` b -> processNode col indentLevel (a:b:ds)
+            a `Union` b -> processNode col indentLevel (b:ds)
+        checkIndentLevel :: Int -> Char -> Int
+        checkIndentLevel curLevel curChar | curChar == '[' = curLevel + 1
+                                          | curChar == '{' = curLevel + 1
+                                          | curChar == ']' = curLevel - 1
+                                          | curChar == '}' = curLevel - 1
+                                          | otherwise = curLevel
+        indentString :: Int -> Int -> String
+        indentString _ 0 = ""
+        indentString indentSize indentLevel = replicate (indentSize * indentLevel) ' '
