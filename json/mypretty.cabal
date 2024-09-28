@@ -1,0 +1,16 @@
+Name:          mypretty
+Version:       0.1
+Synopsis:      Pretty printing with 
+    JSON support
+Description:   Simple pretty printing library 
+    for learning haskell
+Author:        evizitei
+Maintainer:    na@no-reply.com
+Cabal-Version: >= 1.2
+library
+    Exposed-Modules: Prettify
+                     PrettyJSON
+                     Jason
+    Build-Depends: base >= 2.0, template-haskell
+
+-- This is a comment.  It stretches to the end of the line.
