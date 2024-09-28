@@ -1,5 +1,5 @@
 module Prettify (
-    Doc, (<->), punctuate, compact, pretty, fill,
+    Doc, (<->), punctuate, compact, pretty, fill, nest,
     hcat, fsep, text, double, char
     ) where
 
