@@ -4,6 +4,7 @@ compile:
 	ghc -outputdir ./build -o ./bin/hello hello.hs
 	ghc -outputdir ./build -o ./bin/wc wc.hs
 	ghc -outputdir ./build --make interact_with.hs -o ./bin/interact_with
+	ghc -outputdir ./build --make typeclasses/read.hs -o ./bin/read_double
 
 compile_json:
 	ghc -outputdir ./build \
